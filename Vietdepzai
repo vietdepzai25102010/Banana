@@ -121,11 +121,7 @@ Tabs.Main0:AddButton({Title="Youtuber",Description="VTD Roblox",Callback=functio
 -- Tab 1
 Tabs.Main1:AddButton({Title="Redz Hub",Callback=function()
     local Settings={JoinTeam="Pirates",Translator=true}
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))(Settings)
-end})
-
-Tabs.Main1:AddButton({Title="w-azure Hub",Callback=function()
-    loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824c1aa007fc7324f8f.lua"))()
+     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/20f318386e3fbf069ee3fa797cfc9f34.lua"))()
 end})
 
 Tabs.Main1:AddButton({Title="fix lag",Callback=function()
@@ -398,5 +394,12 @@ Tabs.Main1:AddButton({
     Description="để farm 🐿️",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/flazhy/QuantumOnyx/refs/heads/main/QuantumOnyx.lua"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="gravity hub",
+    Description="để cày item",
+    Callback=function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()
     end
 })
