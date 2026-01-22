@@ -83,10 +83,26 @@ local UICorner = Instance.new("UICorner")
 UICorner.Parent = ImageButton
 UICorner.CornerRadius = UDim.new(1,10)
 
-ImageButton.MouseButton1Down:Connect(function()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.End,false,game)
+ImageButton.MouseButton1Click:Connect(function()
+    local vim = game:GetService("VirtualInputManager")
+    vim:SendKeyEvent(true, Enum.KeyCode.End, false, game)
+    task.wait(0.05)
+    vim:SendKeyEvent(false, Enum.KeyCode.End, false, game)
 end)
 
+repeat task.wait() until game:IsLoaded()
+
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "VTD Roblox 2.4.9",
+    SubTitle = "Blox Fruit",
+    TabWidth = 157,
+    Size = UDim2.fromOffset(450,300),
+    Acrylic = true,
+    Theme = "Light",
+    MinimizeKey = Enum.KeyCode.End
+})
 -- Load Fluent
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 repeat task.wait() until game:IsLoaded()
