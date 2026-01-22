@@ -1,15 +1,24 @@
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
+local Debris = game:GetService("Debris")
 local player = Players.LocalPlayer
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "VTDIntro"
-gui.IgnoreGuiInset = true
-gui.ResetOnSpawn = false
-gui.Parent = player:WaitForChild("PlayerGui")
+if game.CoreGui:FindFirstChild("FluentUI") then
+    game.CoreGui.FluentUI:Destroy()
+end
+
+if game.CoreGui:FindFirstChild("VTD_Toggle") then
+    game.CoreGui.VTD_Toggle:Destroy()
+end
+
+local introGui = Instance.new("ScreenGui")
+introGui.Name = "VTDIntro"
+introGui.IgnoreGuiInset = true
+introGui.ResetOnSpawn = false
+introGui.Parent = player:WaitForChild("PlayerGui")
 
 local msg = Instance.new("TextLabel")
-msg.Parent = gui
+msg.Parent = introGui
 msg.AnchorPoint = Vector2.new(0.5,0.5)
 msg.Position = UDim2.new(0.5,0,0.5,0)
 msg.Size = UDim2.new(0,600,0,120)
@@ -23,60 +32,61 @@ msg.TextStrokeColor3 = Color3.fromRGB(0,0,0)
 msg.TextTransparency = 1
 
 local function createFirework()
-    if not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+    local char = player.Character
+    if not char or not char:FindFirstChild("HumanoidRootPart") then return end
     local part = Instance.new("Part")
     part.Anchored = true
     part.CanCollide = false
     part.Size = Vector3.new(0.5,0.5,0.5)
-    part.Position = player.Character.HumanoidRootPart.Position + Vector3.new(math.random(-10,10),math.random(5,15),math.random(-10,10))
+    part.Position = char.HumanoidRootPart.Position + Vector3.new(math.random(-10,10),math.random(5,15),math.random(-10,10))
     part.Transparency = 1
     part.Parent = workspace
 
-    local firework = Instance.new("ParticleEmitter")
-    firework.Texture = "rbxassetid://243660364"
-    firework.Rate = 50
-    firework.Lifetime = NumberRange.new(1)
-    firework.Speed = NumberRange.new(10)
-    firework.SpreadAngle = Vector2.new(360,360)
-    firework.Color = ColorSequence.new(Color3.fromRGB(math.random(100,255),math.random(100,255),math.random(100,255)))
-    firework.Parent = part
+    local pe = Instance.new("ParticleEmitter")
+    pe.Texture = "rbxassetid://243660364"
+    pe.Rate = 50
+    pe.Lifetime = NumberRange.new(1)
+    pe.Speed = NumberRange.new(10)
+    pe.SpreadAngle = Vector2.new(360,360)
+    pe.Color = ColorSequence.new(Color3.fromRGB(math.random(100,255),math.random(100,255),math.random(100,255)))
+    pe.Parent = part
 
-    game:GetService("Debris"):AddItem(part,2)
+    Debris:AddItem(part,2)
 end
 
-TweenService:Create(msg, TweenInfo.new(1.5, Enum.EasingStyle.Quad), {TextTransparency=0}):Play()
+TweenService:Create(msg, TweenInfo.new(1.5), {TextTransparency = 0}):Play()
 task.wait(1.5)
 
-local startTime = tick()
-while tick() - startTime < 5 do
+local t0 = tick()
+while tick() - t0 < 5 do
     msg.TextColor3 = Color3.fromRGB(math.random(0,255),math.random(180,255),math.random(200,255))
     createFirework()
     task.wait(0.25)
 end
 
-TweenService:Create(msg, TweenInfo.new(2, Enum.EasingStyle.Sine), {TextTransparency=1}):Play()
+TweenService:Create(msg, TweenInfo.new(2), {TextTransparency = 1}):Play()
 task.wait(2)
-gui:Destroy()
+introGui:Destroy()
 
 repeat task.wait() until game:IsLoaded()
 
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "VIETDEPZAI",
-    SubTitle = "vietdepzai on top",
+    Title = "vietdepzaicuto",
+    SubTitle = "Blox Fruit",
     TabWidth = 157,
     Size = UDim2.fromOffset(450,300),
     Acrylic = true,
     Theme = "Light"
 })
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Parent = game.CoreGui
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local toggleGui = Instance.new("ScreenGui")
+toggleGui.Name = "vietdepzai"
+toggleGui.Parent = game.CoreGui
 
 local ImageButton = Instance.new("ImageButton")
-ImageButton.Parent = ScreenGui
+ImageButton.Parent = toggleGui
 ImageButton.BackgroundColor3 = Color3.fromRGB(0,0,0)
 ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.1,0,0.15,0)
@@ -93,19 +103,6 @@ ImageButton.MouseButton1Click:Connect(function()
     minimized = not minimized
     Window:Minimize(minimized)
 end)
--- Load Fluent
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
-repeat task.wait() until game:IsLoaded()
-local Window = Fluent:CreateWindow({
-    Title="VTD Roblox 2.4.9",
-    SubTitle="Blox Fruit",
-    TabWidth=157,
-    Size=UDim2.fromOffset(450,300),
-    Acrylic=true,
-    Theme="Light",
-    MinimizeKey=Enum.KeyCode.End
-})
-
 local Tabs = {
     Main0=Window:AddTab({Title="Thông Tin"}),
     Main1=Window:AddTab({Title="Script Blox fruit"}),
