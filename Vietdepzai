@@ -118,12 +118,6 @@ local Tabs = {
 Tabs.Main0:AddButton({Title="Discord",Description="VTD Roblox Community",Callback=function() setclipboard("https://discord.gg/qEkEHgkQ") end})
 Tabs.Main0:AddButton({Title="Youtuber",Description="VTD Roblox",Callback=function() setclipboard("https://youtube.com/@vtd.roblox1?si=A5NM7LD-DIOE3a_0") end})
 
--- Tab 1
-Tabs.Main1:AddButton({Title="Redz Hub",Callback=function()
-    local Settings={JoinTeam="Pirates",Translator=true}
-     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/20f318386e3fbf069ee3fa797cfc9f34.lua"))()
-end})
-
 -- Tab 2
 Tabs.Main2:AddButton({Title="nat hub",Callback=function()
     loadstring(game:HttpGet("https://get.nathub.xyz/loader"))()
@@ -262,10 +256,6 @@ Tabs.Main1:AddButton({Title="w-azure Hub", Callback=function()
     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/85e904ae1ff30824c1aa007fc7324f8f.lua"))()
 end})
 
-Tabs.Main1:AddButton({Title="fix lag", Callback=function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua"))()
-end})
-
 Tabs.Main1:AddButton({Title="speed hub", Callback=function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
 end})
@@ -377,5 +367,16 @@ Tabs.Main1:AddButton({
     Description="để cày item",
     Callback=function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()
+    end
+})
+Tabs.Main1:AddButton({
+    Title="script pvp",
+    Description="để đi đánh nhau",
+    Callback=function()
+        local script_mode = "PVP" -- PVP, FARM
+local loader = loadstring
+local url = "https://raw.githubusercontent.com/hermanos-dev/hermanos-hub/refs/heads/main/Loader.lua"
+local response = game:HttpGet(url)
+loader(response)()
     end
 })
