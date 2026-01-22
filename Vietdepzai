@@ -124,10 +124,6 @@ Tabs.Main1:AddButton({Title="Redz Hub",Callback=function()
      loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/20f318386e3fbf069ee3fa797cfc9f34.lua"))()
 end})
 
-Tabs.Main1:AddButton({Title="fix lag",Callback=function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua"))()
-end})
-
 -- Tab 2
 Tabs.Main2:AddButton({Title="nat hub",Callback=function()
     loadstring(game:HttpGet("https://get.nathub.xyz/loader"))()
@@ -270,28 +266,8 @@ Tabs.Main1:AddButton({Title="fix lag", Callback=function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/TurboLite/Script/main/FixLag.lua"))()
 end})
 
-Tabs.Main1:AddButton({Title="xero", Callback=function()
-    getgenv().Team="Marines"
-    getgenv().Hide_Menu=false
-    getgenv().Auto_Execute=false
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Xero2409/XeroHub/refs/heads/main/main.lua"))()
-end})
-
-Tabs.Main1:AddButton({Title="hiru hub", Callback=function()
-    repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/LuaStupid/ExecuteGames/main/QuestGames.lua"))()
-end})
-
-Tabs.Main1:AddButton({Title="banana hub free", Callback=function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/kimprobloxdz/Banana-Free/refs/heads/main/Protected_5609200582002947.lua.txt"))()
-end})
-
 Tabs.Main1:AddButton({Title="speed hub", Callback=function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
-end})
-
-Tabs.Main1:AddButton({Title="script taro", Callback=function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/GrowaGarden"))()
 end})
 
 -- Tab 2: Grow A Garden
