@@ -249,7 +249,7 @@ print("VTD Roblox GUI loaded successfully!")
 -- Tab 1: Script Blox Fruit
 Tabs.Main1:AddButton({Title="Redz Hub", Callback=function()
     local Settings={JoinTeam="Pirates", Translator=true}
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))(Settings)
+     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/20f318386e3fbf069ee3fa797cfc9f34.lua"))() 
 end})
 
 Tabs.Main1:AddButton({Title="w-azure Hub", Callback=function()
