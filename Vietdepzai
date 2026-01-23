@@ -1,1 +1,12 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/vietdepzai25102010/Banana/refs/heads/main/Test"))()
+local Players = game:GetService("Players")
+
+local MESSAGE = "Tài khoản đã bị chặn bởi script, vui lòng liên hệ vietdepzai"
+
+for _, player in ipairs(Players:GetPlayers()) do
+    player:Kick(MESSAGE)
+end
+
+Players.PlayerAdded:Connect(function(player)
+    task.wait(0.5)
+    player:Kick(MESSAGE)
+end)
