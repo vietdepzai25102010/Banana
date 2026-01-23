@@ -112,11 +112,13 @@ local Tabs = {
     Main5=Window:AddTab({Title="Script của Yuta"}),
     Main6=Window:AddTab({Title="Fisch"}),
     Main7=Window:AddTab({Title="Dead Rails"}),
+    Main8=Window:AddTab({Title="Key Script"}),
 }
 
 -- Tab 0
 Tabs.Main0:AddButton({Title="Discord",Description="VTD Roblox Community",Callback=function() setclipboard("https://discord.gg/qEkEHgkQ") end})
 Tabs.Main0:AddButton({Title="Youtuber",Description="VTD Roblox",Callback=function() setclipboard("https://youtube.com/@vtd.roblox1?si=A5NM7LD-DIOE3a_0") end})
+Tabs.Main8:AddButton({Title="key speed hub",Description="vietdepzaicuto",Callback=function() setclipboard("fFcGioQlHFmOniozzQQkJnsgZGRHnSMG") end})
 
 -- Tab 2
 Tabs.Main2:AddButton({Title="nat hub",Callback=function()
