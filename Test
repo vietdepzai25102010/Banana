@@ -117,7 +117,7 @@ ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.1,0,0.15,0)
 ImageButton.Size = UDim2.new(0,40,0,40)
 ImageButton.Draggable = true
-ImageButton.Image = "http://www.roblox.com/asset/?id=124682499503385"
+ImageButton.Image = "http://www.roblox.com/asset/?id=116380677591087"
 
 Instance.new("UICorner", ImageButton).CornerRadius = UDim.new(1,10)
 
