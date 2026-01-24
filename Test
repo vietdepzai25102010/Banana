@@ -1,72 +1,97 @@
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
-local Debris = game:GetService("Debris")
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
 local player = Players.LocalPlayer
 
-if game.CoreGui:FindFirstChild("FluentUI") then
-    game.CoreGui.FluentUI:Destroy()
+if player.PlayerGui:FindFirstChild("VTD_Intro") then
+    player.PlayerGui.VTD_Intro:Destroy()
 end
 
-if game.CoreGui:FindFirstChild("VTD_Toggle") then
-    game.CoreGui.VTD_Toggle:Destroy()
-end
+local gui = Instance.new("ScreenGui")
+gui.Name = "VTD_Intro"
+gui.IgnoreGuiInset = true
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
 
-local introGui = Instance.new("ScreenGui")
-introGui.Name = "VTDIntro"
-introGui.IgnoreGuiInset = true
-introGui.ResetOnSpawn = false
-introGui.Parent = player:WaitForChild("PlayerGui")
+local blur = Instance.new("BlurEffect")
+blur.Size = 0
+blur.Parent = Lighting
 
-local msg = Instance.new("TextLabel")
-msg.Parent = introGui
-msg.AnchorPoint = Vector2.new(0.5,0.5)
-msg.Position = UDim2.new(0.5,0,0.5,0)
-msg.Size = UDim2.new(0,600,0,120)
-msg.BackgroundTransparency = 1
-msg.Text = "🐿️ việt đẹp zai 🐿️"
-msg.TextColor3 = Color3.fromRGB(0,255,255)
-msg.Font = Enum.Font.GothamBlack
-msg.TextScaled = true
-msg.TextStrokeTransparency = 0
-msg.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-msg.TextTransparency = 1
+local bg = Instance.new("Frame")
+bg.Parent = gui
+bg.Size = UDim2.fromScale(1,1)
+bg.BackgroundColor3 = Color3.fromRGB(10,10,15)
+bg.BackgroundTransparency = 1
 
-local function createFirework()
-    local char = player.Character
-    if not char or not char:FindFirstChild("HumanoidRootPart") then return end
-    local part = Instance.new("Part")
-    part.Anchored = true
-    part.CanCollide = false
-    part.Size = Vector3.new(0.5,0.5,0.5)
-    part.Position = char.HumanoidRootPart.Position + Vector3.new(math.random(-10,10),math.random(5,15),math.random(-10,10))
-    part.Transparency = 1
-    part.Parent = workspace
+local title = Instance.new("TextLabel")
+title.Parent = gui
+title.AnchorPoint = Vector2.new(0.5,0.5)
+title.Position = UDim2.fromScale(0.5,0.5)
+title.Size = UDim2.fromOffset(700,140)
+title.BackgroundTransparency = 1
+title.Text = "VTD ROBLOX"
+title.Font = Enum.Font.GothamBlack
+title.TextScaled = true
+title.TextColor3 = Color3.fromRGB(0,255,255)
+title.TextTransparency = 1
+title.TextStrokeTransparency = 1
 
-    local pe = Instance.new("ParticleEmitter")
-    pe.Texture = "rbxassetid://243660364"
-    pe.Rate = 50
-    pe.Lifetime = NumberRange.new(1)
-    pe.Speed = NumberRange.new(10)
-    pe.SpreadAngle = Vector2.new(360,360)
-    pe.Color = ColorSequence.new(Color3.fromRGB(math.random(100,255),math.random(100,255),math.random(100,255)))
-    pe.Parent = part
+local sub = Instance.new("TextLabel")
+sub.Parent = gui
+sub.AnchorPoint = Vector2.new(0.5,0.5)
+sub.Position = UDim2.fromScale(0.5,0.62)
+sub.Size = UDim2.fromOffset(500,60)
+sub.BackgroundTransparency = 1
+sub.Text = "Loading Script..."
+sub.Font = Enum.Font.GothamMedium
+sub.TextScaled = true
+sub.TextColor3 = Color3.fromRGB(200,200,200)
+sub.TextTransparency = 1
 
-    Debris:AddItem(part,2)
-end
+local ring = Instance.new("Frame")
+ring.Parent = gui
+ring.AnchorPoint = Vector2.new(0.5,0.5)
+ring.Position = UDim2.fromScale(0.5,0.5)
+ring.Size = UDim2.fromOffset(220,220)
+ring.BackgroundTransparency = 1
 
-TweenService:Create(msg, TweenInfo.new(1.5), {TextTransparency = 0}):Play()
-task.wait(1.5)
+local uiStroke = Instance.new("UIStroke")
+uiStroke.Parent = ring
+uiStroke.Thickness = 3
+uiStroke.Color = Color3.fromRGB(0,255,255)
+uiStroke.Transparency = 1
 
-local t0 = tick()
-while tick() - t0 < 5 do
-    msg.TextColor3 = Color3.fromRGB(math.random(0,255),math.random(180,255),math.random(200,255))
-    createFirework()
-    task.wait(0.25)
-end
+Instance.new("UICorner", ring).CornerRadius = UDim.new(1,0)
 
-TweenService:Create(msg, TweenInfo.new(2), {TextTransparency = 1}):Play()
-task.wait(2)
-introGui:Destroy()
+TweenService:Create(bg, TweenInfo.new(1), {BackgroundTransparency = 0}):Play()
+TweenService:Create(blur, TweenInfo.new(1), {Size = 18}):Play()
+TweenService:Create(title, TweenInfo.new(1.2, Enum.EasingStyle.Quint), {
+    TextTransparency = 0,
+    TextStrokeTransparency = 0.3
+}):Play()
+TweenService:Create(sub, TweenInfo.new(1.2), {TextTransparency = 0}):Play()
+TweenService:Create(uiStroke, TweenInfo.new(1), {Transparency = 0}):Play()
+
+local rot = 0
+local conn = RunService.RenderStepped:Connect(function(dt)
+    rot += dt * 90
+    ring.Rotation = rot
+end)
+
+task.wait(4)
+
+TweenService:Create(title, TweenInfo.new(0.8), {TextTransparency = 1, TextStrokeTransparency = 1}):Play()
+TweenService:Create(sub, TweenInfo.new(0.8), {TextTransparency = 1}):Play()
+TweenService:Create(uiStroke, TweenInfo.new(0.8), {Transparency = 1}):Play()
+TweenService:Create(bg, TweenInfo.new(0.8), {BackgroundTransparency = 1}):Play()
+TweenService:Create(blur, TweenInfo.new(0.8), {Size = 0}):Play()
+
+task.wait(1)
+
+conn:Disconnect()
+blur:Destroy()
+gui:Destroy()
 
 repeat task.wait() until game:IsLoaded()
 
@@ -94,25 +119,24 @@ ImageButton.Size = UDim2.new(0,40,0,40)
 ImageButton.Draggable = true
 ImageButton.Image = "http://www.roblox.com/asset/?id=124682499503385"
 
-local UICorner = Instance.new("UICorner")
-UICorner.Parent = ImageButton
-UICorner.CornerRadius = UDim.new(1,10)
+Instance.new("UICorner", ImageButton).CornerRadius = UDim.new(1,10)
 
 local minimized = false
 ImageButton.MouseButton1Click:Connect(function()
     minimized = not minimized
     Window:Minimize(minimized)
 end)
+
 local Tabs = {
-    Main0=Window:AddTab({Title="Thông Tin"}),
-    Main1=Window:AddTab({Title="Script Blox fruit"}),
-    Main2=Window:AddTab({Title="Grow A Garden"}),
-    Main3=Window:AddTab({Title="99 đêm"}),
-    Main4=Window:AddTab({Title="ink game"}),
-    Main5=Window:AddTab({Title="Script của Yuta"}),
-    Main6=Window:AddTab({Title="Fisch"}),
-    Main7=Window:AddTab({Title="Dead Rails"}),
-    Main8=Window:AddTab({Title="Key Script"}),
+    Main0 = Window:AddTab({Title="Thông Tin"}),
+    Main1 = Window:AddTab({Title="Script Blox fruit"}),
+    Main2 = Window:AddTab({Title="Grow A Garden"}),
+    Main3 = Window:AddTab({Title="99 đêm"}),
+    Main4 = Window:AddTab({Title="ink game"}),
+    Main5 = Window:AddTab({Title="Script của Yuta"}),
+    Main6 = Window:AddTab({Title="Fisch"}),
+    Main7 = Window:AddTab({Title="Dead Rails"}),
+    Main8 = Window:AddTab({Title="Key Script"}),
 }
 
 -- Tab 0
