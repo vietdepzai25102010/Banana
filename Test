@@ -102,9 +102,35 @@ local Window = Fluent:CreateWindow({
     SubTitle = "Blox Fruit",
     TabWidth = 157,
     Size = UDim2.fromOffset(450,300),
-    Acrylic = true,
+    Acrylic = false,
     Theme = "Light"
 })
+
+local bgImage = Instance.new("ImageLabel")
+bgImage.Parent = Window.Root
+bgImage.Size = UDim2.fromScale(1,1)
+bgImage.Position = UDim2.fromScale(0,0)
+bgImage.BackgroundTransparency = 1
+bgImage.Image = "rbxassetid://116380677591087"
+bgImage.ScaleType = Enum.ScaleType.Crop
+bgImage.ZIndex = 0
+
+local gradient = Instance.new("UIGradient")
+gradient.Parent = bgImage
+gradient.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(0,0,0)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255,255,255))
+}
+gradient.Transparency = NumberSequence.new{
+    NumberSequenceKeypoint.new(0, 0.35),
+    NumberSequenceKeypoint.new(1, 0.35)
+}
+
+for _,v in ipairs(Window.Root:GetChildren()) do
+    if v:IsA("GuiObject") and v ~= bgImage then
+        v.ZIndex = v.ZIndex + 1
+    end
+end
 
 local toggleGui = Instance.new("ScreenGui")
 toggleGui.Name = "vietdepzai"
@@ -117,7 +143,7 @@ ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.1,0,0.15,0)
 ImageButton.Size = UDim2.new(0,40,0,40)
 ImageButton.Draggable = true
-ImageButton.Image = "http://www.roblox.com/asset/?id=116380677591087"
+ImageButton.Image = "http://www.roblox.com/asset/?id=124682499503385"
 
 Instance.new("UICorner", ImageButton).CornerRadius = UDim.new(1,10)
 
