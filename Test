@@ -9,7 +9,7 @@ if player.PlayerGui:FindFirstChild("VTD_Intro") then
 end
 
 local gui = Instance.new("ScreenGui")
-gui.Name = "Vietdepzai_Intro"
+gui.Name = "VTD_Intro"
 gui.IgnoreGuiInset = true
 gui.ResetOnSpawn = false
 gui.Parent = player:WaitForChild("PlayerGui")
